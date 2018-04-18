@@ -1,6 +1,6 @@
 'use strict';
 const nodemailer = require('nodemailer');
-var cred = require('./creds.js');
+var cred = require('./creds.js'); // this file needs to be added which contains the credentials
 
 var transporter = nodemailer.createTransport('SMTP', {
 	service: 'Gmail',
@@ -27,4 +27,6 @@ var send_mail = function(to_mail, subject_text, content) {
     });
 }
 
-module.exports = send_mail;
+module.exports = {
+    send_mail: send_mail,
+};
