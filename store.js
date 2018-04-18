@@ -1,9 +1,10 @@
 const knex = require('knex')(require('./knexfile'))
 module.exports = {
-  createUser ({title}) {
-    console.log(`Add book_info ${title}`)
-    return knex('book_info').insert({
-      title
-    })
+  createUser ({info}) {
+  	info.phone_number = parseInt(info.phone_number)
+    return knex('user').insert(info)
+    return new Promise((resolve, reject)=>{
+    	resolve('');
+    });
   }
 }
