@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npm-run-all --parallel dev:*",
+    "dev:start-server": "nodemon --trace-warnings",
+    "dev:build-client": "webpack --watch"
   },
   "author": "manishsherawat1@gmail.com",
   "license": "ISC",
@@ -27,9 +30,11 @@
     "react-dom": "16.0.0",
     "react-helmet": "5.2.0",
     "react-redux": "5.0.6",
+    "npm-run-all": "4.1.1",
     "react-router-config": "1.0.0-beta.4",
     "react-router-dom": "4.2.2",
     "redux": "3.7.2",
+    "antd": "^2.11.2",
     "redux-thunk": "2.2.0",
     "uuid": "^3.2.1"
   }
