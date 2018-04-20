@@ -6,8 +6,8 @@ const userController = require('./user');
 const router = express.Router();
 
 router.post('/', (req, res)=>{console.log(req.body)})
-router.post('/user/register', userController.register);
-
+router.post('/user/register', userController.register)
+router.get('/user/confirm?*', userController.confirm)
 
 
 

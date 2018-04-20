@@ -2,7 +2,7 @@ module.exports = {
   client: 'mysql',
   connection: {
     user: 'root',
-    password: 'password',
-    database: 'book_management_system'
+    password: 'asdfgh123',
+    database: 'book_selling_system'
   }
 }

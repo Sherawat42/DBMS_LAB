@@ -15,8 +15,8 @@ var send_mail = function(to_mail, subject_text, content) {
         from: 'Jesus <mrworldwide42@tutanota.com>',
         to: to_mail,
         subject: subject_text,
-        text: content,
-        html: ''
+        text: '',
+        html: content
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
