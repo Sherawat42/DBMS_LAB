@@ -16,5 +16,15 @@ module.exports = {
   },
   authenticateUser(info) {
     return knex('user').where(info)
+  },
+  updateRoles(info) {
+    return knex('user_role').insert(info)
+  },
+  updateUser(info) {
+    info.u_id = parseInt(info.u_id)
+    return knex('user').where({"u_id": info.u_id}).update(info)
+  },
+  getUserData(info) {
+    return knex('user').where(info)
   }
 }
