@@ -23,8 +23,10 @@ module.exports = {
 					req.body.email, "Confirm registration", "Click on this <a href="+ link +">link</a> to verify yourself"
 				)
 			})
-			.then(() => res.status(200).send({"message": "Successfully registered. Please check your mailbox for confirmation mail."}))
-			.catch(err => res.status(400).send(err))
+			.then(data =>{
+				res.status(200).send({"message": "Successfully registered. Please check your mailbox for confirmation mail."})
+			})
+			.catch(err => {console.log('______',err);res.status(400).send(err)})
 		})
 		.catch(err => res.status(400).send(err))
 	},

@@ -13,6 +13,20 @@ module.exports = function(){
 	app.use(bodyParser.json())
 	app.use(bodyParser.urlencoded({extended: true}));
 
+	app.use((req,res,next)=>{
+		req.poop = 'poop_poop';
+
+		// req.user_roles = pal_ka_function
+
+
+		next();
+	})
+
+	app.use((req,res,next)=>{
+		console.log(req.poop)
+		next();
+	})
+
 	routes(app);
 
 	app.get('*', (req, res) => {
@@ -23,9 +37,9 @@ module.exports = function(){
 			</head>
 			<body>
 				<div id="root"></div>
-				<script src="bundle.js"></script>
+				<script src="/bundle.js"></script>
 			</body>
-			<html>
+			</html>
 		`)
 	})
 	const port = 6969;
