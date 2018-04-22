@@ -15,6 +15,10 @@ module.exports = function(){
 
 	app.use((req,res,next)=>{
 		req.poop = 'poop_poop';
+
+		// req.user_roles = pal_ka_function
+
+
 		next();
 	})
 

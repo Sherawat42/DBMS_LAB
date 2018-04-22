@@ -1,3 +1,4 @@
 node_modules
 .DS_Store
 services/mail_service/creds.js
+src/server/knexfile.js
