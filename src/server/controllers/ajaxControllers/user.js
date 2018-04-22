@@ -23,9 +23,8 @@ module.exports = {
 					req.body.email, "Confirm registration", "Click on this <a href="+ link +">link</a> to verify yourself"
 				)
 			})
+			.then(() => res.status(200).send({"message": "Successfully registered. Please check your mailbox for confirmation mail."}))
 			.catch(err => res.status(400).send(err))
-			
-			res.status(200).send({"message": "Successfully registered. Please check your mailbox for confirmation mail."})
 		})
 		.catch(err => res.status(400).send(err))
 	},
@@ -172,5 +171,12 @@ module.exports = {
 			})
 			.catch(err => res.status(400).send(err))
 		}
+	},
+	getRoles: (req, res) => {
+		store.getRoles(req.query)
+		.then((data) => {
+			res.send(data)
+		})
+		.catch(err => {res.send(err)})
 	}
 }
