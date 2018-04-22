@@ -2,6 +2,7 @@ const knex = require('knex')(require('./knexfile'))
 module.exports = {
   createUser (info) {
   	info.phone_number = parseInt(info.phone_number)
+    info.verified = 0;
     return knex('user').insert(info)
   },
   createToken (info) {
