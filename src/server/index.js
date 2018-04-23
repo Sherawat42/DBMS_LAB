@@ -9,23 +9,26 @@ const routes = require('./routes');
 
 module.exports = function(){
 	const app = express()
+	app.use(bodyParser.urlencoded({ extended: true }));
+	app.use(bodyParser.json());
+
 	app.use(express.static('public'))
-	app.use(bodyParser.json())
-	app.use(bodyParser.urlencoded({extended: true}));
-
-	app.use((req,res,next)=>{
-		req.poop = 'poop_poop';
-
-		// req.user_roles = pal_ka_function
 
 
-		next();
-	})
+	// app.use((req,res,next)=>{
+	// 	console.log('____',req.body)
+	// 	req.poop = 'poop_poop';
 
-	app.use((req,res,next)=>{
-		console.log(req.poop)
-		next();
-	})
+	// 	// req.user_roles = pal_ka_function
+
+
+	// 	next();
+	// })
+
+	// app.use((req,res,next)=>{
+	// 	console.log(req.poop)
+	// 	next();
+	// })
 
 	routes(app);
 

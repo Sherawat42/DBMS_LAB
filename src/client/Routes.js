@@ -8,6 +8,7 @@ import TestComponent from './components/TestComponent';
 
 
 import UserRegister from './components/UserComponents/Register';
+import UserLogin from './components/UserComponents/Login';
 
 export default () =>{
 	return (
@@ -18,6 +19,10 @@ export default () =>{
 
 
 				<Route exact path="/user/register" component={UserRegister} />
+				<Route exact path="/user/login" component={UserLogin} />
+
+
+				
 			</Switch>
 		</div>
 	);

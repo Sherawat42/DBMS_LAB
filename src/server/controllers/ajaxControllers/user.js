@@ -8,6 +8,7 @@ const role_map = {"client": 1, "owner": 2, "author": 3, "publisher": 4, "deliver
 
 module.exports = {
     register: (req, res) => {
+		console.log(req.body);
 		store.createUser(req.body)
 		.then((data) => {
 			let token = uuid()
@@ -26,11 +27,10 @@ module.exports = {
 			.then(data =>{
 				res.status(200).send({"message": "Successfully registered. Please check your mailbox for confirmation mail."})
 			})
-			.catch(err => {console.log('______',err);res.status(400).send(err)})
 
 			
 		})
-		.catch(err => res.status(400).send(err))
+		.catch(err => {console.log('______',err);res.status(400).send(err)})
 	},
 	confirm: (req, res) => {
 		store.getTokenData(req.query)
