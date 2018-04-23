@@ -27,8 +27,6 @@ module.exports = {
 			.then(data =>{
 				res.status(200).send({"message": "Successfully registered. Please check your mailbox for confirmation mail."})
 			})
-
-			
 		})
 		.catch(err => {console.log('______',err);res.status(400).send(err)})
 	},
@@ -175,5 +173,12 @@ module.exports = {
 			})
 			.catch(err => res.status(400).send(err))
 		}
+	},
+	getRoles: (req, res) => {
+		store.getRoles(req.query)
+		.then((data) => {
+			res.send(data)
+		})
+		.catch(err => {res.status(400).send(err)})
 	}
 }

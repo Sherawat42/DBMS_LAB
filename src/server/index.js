@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const routes = require('./routes');
-
+const store = require('./store')
 // TODO: MAKE A GLOBALS.JS FILE WHICH ATLEAST INCLUDES PATH TO STORE AND SERVICES
 
 // const mailer = require('./mail_service/mailer')
@@ -14,21 +14,11 @@ module.exports = function(){
 
 	app.use(express.static('public'))
 
-
-	// app.use((req,res,next)=>{
-	// 	console.log('____',req.body)
-	// 	req.poop = 'poop_poop';
-
-	// 	// req.user_roles = pal_ka_function
-
-
-	// 	next();
-	// })
-
-	// app.use((req,res,next)=>{
-	// 	console.log(req.poop)
-	// 	next();
-	// })
+	app.use(async (req,res,next)=>{
+		req.user_roles = await store.getRoles(req.body)
+		.catch(err => res.status(400).send({"message": "Error occurred while getting user roles", "log": err}))
+		next();
+	})
 
 	routes(app);
 
