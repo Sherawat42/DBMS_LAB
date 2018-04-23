@@ -47,10 +47,13 @@ class UserLogin extends Component {
 	xhr.setRequestHeader('Content-Type', 'application/json')
 
 	xhr.onreadystatechange = function() {
-	    if (this.status == 200) {
-	    	
+	    if (this.readyState==4 && this.status == 200) {
+	    	let response = this.response
+	    	if(!response.err){
+		    	window.localStorage.authentication_data = this.response.data;
+		    	window.location = '/dashboad';
+	    	}
 	    }
-
 	    if(this.status >= 400){
 	    	console.log("ERROR OCCURRED, CHECK SEREVER LOGS")
 	    }

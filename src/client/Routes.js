@@ -9,6 +9,7 @@ import TestComponent from './components/TestComponent';
 
 import UserRegister from './components/UserComponents/Register';
 import UserLogin from './components/UserComponents/Login';
+import Dashboard from './components/UserComponents/Dashboard';
 
 export default () =>{
 	return (
@@ -17,6 +18,9 @@ export default () =>{
 				<Route exact path="/hi" component={TestComponent} />
 				<Route exact path="/bye" component={()=>'Bye'} />
 
+
+
+				<Route exact path="/dashboard" component={Dashboard} />
 
 				<Route exact path="/user/register" component={UserRegister} />
 				<Route exact path="/user/login" component={UserLogin} />

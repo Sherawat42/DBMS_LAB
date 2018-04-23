@@ -14,10 +14,17 @@ module.exports = function(){
 
 	app.use(express.static('public'))
 
-	app.use(async (req,res,next)=>{
-		req.user_roles = await store.getRoles(req.body)
-		.catch(err => res.status(400).send({"message": "Error occurred while getting user roles", "log": err}))
-		next();
+	app.use((req,res,next)=>{
+		console.log(req.body)
+		store.getRoles(req.body).then(data=>{
+			req.user_roles = data
+			next();
+		}).catch(err => {
+			req.user_roles = {};
+			console.log('The User Roles were not identified!')
+			next();
+			// res.status(400).send({"message": "Error occurred while getting user roles", "log": err})
+		})
 	})
 
 	routes(app);
