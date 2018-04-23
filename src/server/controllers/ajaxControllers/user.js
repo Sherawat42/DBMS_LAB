@@ -66,15 +66,18 @@ module.exports = {
 					let token = uuid()
 					store.createToken({"u_id": u_data.u_id, "purpose": "login", "token": token})
 					.then(() => res.send({
-						"token": token, "u_id": u_data.u_id, "phone_number": u_data.phone_number,
-						"address": u_data.address, "name": u_data.name, "email": u_data.email
+						err : null,
+						data :{	
+							"token": token, "u_id": u_data.u_id, "phone_number": u_data.phone_number,
+							"address": u_data.address, "name": u_data.name, "email": u_data.email
+						}
 					}))
-					.catch(err => res.status(400).send(err))
+					.catch(err => {throw new Error(err)})
 				} else {
-					res.status(403).send({"message": "Email address not verified!"})
+					throw new Error("Email address not verified!");
 				}
 			} else {
-				res.status(401).send({"message": "Unauthorized Access! Either email or password is incorrect"})
+				throw new Error("Unauthorized Access! Either email or password is incorrect")
 			}
 		})
 		.catch(err => res.status(400).send(err))
