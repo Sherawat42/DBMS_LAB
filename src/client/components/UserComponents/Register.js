@@ -48,8 +48,8 @@ class UserRegister extends Component {
 	xhr.setRequestHeader('Content-Type', 'application/json')
 
 	xhr.onreadystatechange = function() {
-	    if (this.status == 200) {
-
+	    if (this.readyState==4 && this.status == 200) {
+			window.location = '/user/login';
 	    }
 
 	    if(this.status >= 400){
@@ -63,7 +63,6 @@ class UserRegister extends Component {
 
 	xhr.send(JSON.stringify(data));
 
-	window.location = '/hi';
 
 
   }

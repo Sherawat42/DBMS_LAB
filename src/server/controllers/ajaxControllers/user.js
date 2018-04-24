@@ -8,7 +8,6 @@ const role_map = {"client": 1, "owner": 2, "author": 3, "publisher": 4, "deliver
 
 module.exports = {
     register: (req, res) => {
-		console.log(req.body);
 		store.createUser(req.body)
 		.then((data) => {
 			let token = uuid()
@@ -65,13 +64,15 @@ module.exports = {
 				if(u_data.verified == 1) {
 					let token = uuid()
 					store.createToken({"u_id": u_data.u_id, "purpose": "login", "token": token})
-					.then(() => res.send({
-						err : null,
-						data :{	
-							"token": token, "u_id": u_data.u_id, "phone_number": u_data.phone_number,
-							"address": u_data.address, "name": u_data.name, "email": u_data.email
-						}
-					}))
+					.then((obj) => {
+						res.send({
+							err : null,
+							data :{	
+								"token": token, "u_id": u_data.u_id, "phone_number": u_data.phone_number,
+								"address": u_data.address, "name": u_data.name, "email": u_data.email
+							}
+						})
+					})
 					.catch(err => {throw new Error(err)})
 				} else {
 					throw new Error("Email address not verified!");
@@ -85,6 +86,7 @@ module.exports = {
 	updateRoles: (req, res) => {
 		// req.body should be like {"roles": [role1, role2 ...], "token": <token>, "u_id": <u_id>}
 		// "roles" take array of `string` roles, should be replaced by role_id instead?
+		console.log('MMMMMMMMMMMMMMMM', req.body)
 		if(req.body.token == undefined) res.status(401).send({"message": "Authentication token required!"})
 		store.getTokenData({"token": req.body.token, "u_id": req.body.u_id, "purpose": "login"})
 		.then((data) => {
@@ -183,5 +185,22 @@ module.exports = {
 			res.send(data)
 		})
 		.catch(err => {res.status(400).send(err)})
+	},
+	loggedInCheck: (req, res)=>{
+		if(req.user_info.token){
+			res.send({err: false, data: {logged_in:true}})
+		}else{
+			res.send({err: false, data: {logged_in:false}})
+		}
+	},
+	logout: (req, res) => {
+		console.log(req.user_info);
+		store.logout({token: req.user_info.token})
+		.then(data=>{
+			res.send({err: null})
+		}).catch(err=>{
+			console.log('Error in logout', err)
+			res.status(400).send({err: true, message: "couldn't logout!"})
+		})
 	}
 }

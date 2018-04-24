@@ -10,6 +10,7 @@ import TestComponent from './components/TestComponent';
 import UserRegister from './components/UserComponents/Register';
 import UserLogin from './components/UserComponents/Login';
 import Dashboard from './components/UserComponents/Dashboard';
+import UserUpdate from './components/UserComponents/UpdationForm';
 
 export default () =>{
 	return (
@@ -24,6 +25,7 @@ export default () =>{
 
 				<Route exact path="/user/register" component={UserRegister} />
 				<Route exact path="/user/login" component={UserLogin} />
+				<Route exact path="/user/update" component={UserUpdate} />
 
 
 				

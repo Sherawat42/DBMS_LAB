@@ -48,10 +48,11 @@ class UserLogin extends Component {
 
 	xhr.onreadystatechange = function() {
 	    if (this.readyState==4 && this.status == 200) {
-	    	let response = this.response
+	    	let response = JSON.parse(this.response);
 	    	if(!response.err){
-		    	window.localStorage.authentication_data = this.response.data;
-		    	window.location = '/dashboad';
+		    	window.localStorage.authentication_data = JSON.stringify(response.data);
+		    	console.log(response.data)
+		    	window.location = '/dashboard';
 	    	}
 	    }
 	    if(this.status >= 400){

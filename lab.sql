@@ -358,7 +358,6 @@ DELIMITER ;;
 /*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 trigger TokenGeneration before insert on tokens
 for each row
 begin
-if(new.purpose="login") then set new.token = UUID(); end if;
 set new.TTL = 604800; set new.timestamp_epoch = UNIX_TIMESTAMP(CURRENT_TIMESTAMP());
 end */;;
 DELIMITER ;

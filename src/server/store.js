@@ -30,13 +30,19 @@ module.exports = {
   getUserData(info) {
     return knex('user').where(info)
   },
+  logout(token){
+    return knex('tokens').delete().where(token)
+  },
   getRoles(info) {
+    let return_obj = {};
     return knex('tokens').where(info)
     .then((data) => {
       if(data.length > 0) {
         return knex('user').where({"u_id": data[0].u_id, "verified": 1})
         .then((u_data) => {
           if(u_data.length > 0) {
+            return_obj.user = u_data[0];
+            return_obj.token = info.token;
             return knex('user_role').where({"u_id": data[0].u_id})
             .then((role_data) => {
               let role_ids = []
@@ -52,6 +58,9 @@ module.exports = {
       } else {
         return {"err": "Invalid token"}
       }
+    }).then(roles=>{
+      return_obj.roles = roles
+      return return_obj;
     })
   }
 }

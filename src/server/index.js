@@ -15,12 +15,13 @@ module.exports = function(){
 	app.use(express.static('public'))
 
 	app.use((req,res,next)=>{
-		console.log(req.body)
-		store.getRoles(req.body).then(data=>{
-			req.user_roles = data
+		// console.log('___-',req.body)
+		store.getRoles(req.body ? (req.body.authentication_data? {token:req.body.authentication_data.token}:''):'').then(data=>{
+			req.user_info = data
+			console.log('The User Roles were successfully identified!', data)
 			next();
 		}).catch(err => {
-			req.user_roles = {};
+			req.user_info = {};
 			console.log('The User Roles were not identified!')
 			next();
 			// res.status(400).send({"message": "Error occurred while getting user roles", "log": err})
